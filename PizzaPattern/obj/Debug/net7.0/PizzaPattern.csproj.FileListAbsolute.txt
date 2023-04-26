@@ -1,0 +1,15 @@
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/bin/Debug/net7.0/PizzaPattern
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/bin/Debug/net7.0/PizzaPattern.deps.json
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/bin/Debug/net7.0/PizzaPattern.runtimeconfig.json
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/bin/Debug/net7.0/PizzaPattern.dll
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/bin/Debug/net7.0/PizzaPattern.pdb
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.csproj.AssemblyReference.cache
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.AssemblyInfoInputs.cache
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.AssemblyInfo.cs
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.csproj.CoreCompileInputs.cache
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.dll
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/refint/PizzaPattern.dll
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.pdb
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/PizzaPattern.genruntimeconfig.cache
+/Users/ellana/Documents/Programs/PizzaPattern/PizzaPattern/obj/Debug/net7.0/ref/PizzaPattern.dll
