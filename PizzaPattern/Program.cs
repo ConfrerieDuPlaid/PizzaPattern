@@ -2,6 +2,19 @@
 
 using PizzaPattern;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Bienvenue chez Pizza Pattern !");
+string? input = "";
+while (input != "exit")
+{
+    Console.WriteLine("Placez votre commande ('exit' pour sortir) :");
+    input = Console.ReadLine();
+    if (input == "exit")
+    {
+        break;
+    }
 
-Order.PlaceOrder();
+    if (input != null && input.Trim() != "")
+    {
+        Order order = new Order(input);
+    }
+}
