@@ -9,17 +9,7 @@ public class Bill
         Dictionary<string, int> orderList = order.GetOrderList();
         foreach (string pizzaName in orderList.Keys)
         {
-            switch (pizzaName)
-            {
-                case "Regina": pizza = Pizza.Regina();
-                    break;
-                case "4Seasons": pizza = Pizza.FourSeasons();
-                    break;
-                case "Vegetarian": pizza = Pizza.Vegetarian();
-                    break;
-                default:
-                    throw new Exception("This pizza is not in the menu !");
-            }
+            pizza = Pizza.Of(pizzaName);
         
             Console.WriteLine("{0} {1} : {0} * {2}€", orderList[pizzaName], pizzaName, pizza.Price);
             totalPrice += orderList[pizzaName] * pizza.Price;

@@ -24,18 +24,7 @@ public class Order
                 throw new Exception("Invalid row format for row : " + orderRow);
             }
 
-            switch (rowElements[1])
-            {
-                case "Regina": pizza = Pizza.Regina();
-                    break;
-                case "4Seasons": pizza = Pizza.FourSeasons();
-                    break;
-                case "Vegetarian": pizza = Pizza.Vegetarian();
-                    break;
-                default:
-                    throw new Exception("This pizza is not in the menu !");
-            }
-
+            pizza = Pizza.Of(rowElements[1]);
             if (_orderList.ContainsKey(pizza.Name))
             {
                 _orderList[pizza.Name] += numberOfPizza;
@@ -52,21 +41,7 @@ public class Order
         Pizza pizza;
         foreach (string pizzaName in _orderList.Keys)
         {
-            switch (pizzaName)
-            {
-                case "Regina":
-                    pizza = Pizza.Regina();
-                    break;
-                case "4Seasons":
-                    pizza = Pizza.FourSeasons();
-                    break;
-                case "Vegetarian":
-                    pizza = Pizza.Vegetarian();
-                    break;
-                default:
-                    throw new Exception("This pizza is not in the menu !");
-            }
-
+            pizza = Pizza.Of(pizzaName);
             pizza.PrintInstructions();
         }
     }

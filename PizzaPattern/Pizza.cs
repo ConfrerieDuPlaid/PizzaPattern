@@ -83,4 +83,19 @@ public class Pizza
         var instructions = InitInstructions(ingredients);
         return new Pizza("Vegetarian", ingredients, 7.5, instructions);
     }
+
+    public static Pizza Of (string pizzaName)
+    {
+        switch (pizzaName)
+        {
+            case "Regina":
+                return Pizza.Regina();
+            case "4Seasons":
+                return Pizza.FourSeasons();
+            case "Vegetarian":
+                return Pizza.Vegetarian();
+            default:
+                throw new Exception("This pizza is not in the menu !");
+        }
+    }
 }
