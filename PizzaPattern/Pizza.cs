@@ -6,14 +6,39 @@ public class Pizza
     public List<Ingredient> Ingredients { get; }
     public double Price { get; }
     
+    public List<string> Instructions { get; }
     
-    public Pizza(string name, List<Ingredient> ingredients, double price)
+    public Pizza(string name, List<Ingredient> ingredients, double price, List<string> instructions)
     {
         Name = name;
         Ingredients = ingredients;
         Price = price;
+        Instructions = instructions;
     }
 
+    public void PrintInstructions()
+    {
+        Console.WriteLine(Name);
+        foreach (var instruction in Instructions)
+        {
+            Console.WriteLine(instruction);
+        }
+    }
+
+    private static List<string> InitInstructions(List<Ingredient> ingredients)
+    {
+        var instructions = new List<string>()
+        {
+            "Prepare the dough"
+        };
+        foreach (var ingredient in ingredients)
+        {
+            instructions.Add("Add the " + ingredient.Name);
+        }
+        instructions.Add("Bake the pizza");
+        return instructions;
+    }
+    
     public static Pizza Regina()
     {
         var ingredients = new List<Ingredient>
@@ -25,7 +50,8 @@ public class Pizza
             new Ingredient("Mushrooms", 4, Unit.Pieces),
             new Ingredient("Olive oil", 2, Unit.Tablespoons)
         };
-        return new Pizza("Regina", ingredients, 8.0);
+        var instructions = InitInstructions(ingredients);
+        return new Pizza("Regina", ingredients, 8.0, instructions);
     }
 
     public static Pizza FourSeasons()
@@ -39,7 +65,8 @@ public class Pizza
             new Ingredient("Peppers", 0.5, Unit.Pieces),
             new Ingredient("Olives", 1, Unit.Handful)
         };
-        return new Pizza("4Seasons", ingredients, 9.0);
+        var instructions = InitInstructions(ingredients);
+        return new Pizza("4Seasons", ingredients, 9.0, instructions);
     }
 
     public static Pizza Vegetarian()
@@ -53,6 +80,7 @@ public class Pizza
             new Ingredient("Cherry tomatoes", 6, Unit.Pieces),
             new Ingredient("Olives", 1, Unit.Handful)
         };
-        return new Pizza("Vegetarian", ingredients, 7.5);
+        var instructions = InitInstructions(ingredients);
+        return new Pizza("Vegetarian", ingredients, 7.5, instructions);
     }
 }

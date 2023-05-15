@@ -17,5 +17,6 @@ while (input != "exit")
     {
         Order order = new Order(input);
         Bill.PrintBill(order);
+        order.PrintAllInstructions();
     }
 }

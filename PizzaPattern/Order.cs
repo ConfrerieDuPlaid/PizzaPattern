@@ -47,6 +47,30 @@ public class Order
         }
     }
 
+    public void PrintAllInstructions()
+    {
+        Pizza pizza;
+        foreach (string pizzaName in _orderList.Keys)
+        {
+            switch (pizzaName)
+            {
+                case "Regina":
+                    pizza = Pizza.Regina();
+                    break;
+                case "4Seasons":
+                    pizza = Pizza.FourSeasons();
+                    break;
+                case "Vegetarian":
+                    pizza = Pizza.Vegetarian();
+                    break;
+                default:
+                    throw new Exception("This pizza is not in the menu !");
+            }
+
+            pizza.PrintInstructions();
+        }
+    }
+
     public Dictionary<string, int> GetOrderList()
     {
         return this._orderList;
