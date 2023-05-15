@@ -2,28 +2,28 @@ namespace PizzaPattern;
 
 public class Order
 {
+    private readonly Dictionary<string, int> _orderList = new Dictionary<string, int>();
+    
     public Order(string order)
     {
-        Dictionary<string, int> orderList = new Dictionary<string, int>();
-
         string[] orderRows = order.Split(",");
 
+        Pizza pizza;
+        int numberOfPizza = 0;
         foreach (string orderRow in orderRows)
         {
-            var trimmedRow = orderRow.Trim();
-            string[] rowElements = trimmedRow.Split(" ");
+            string[] rowElements = orderRow.Trim().Split(" ");
             if (rowElements.Length > 2)
             {
                 throw new Exception("Invalid order format !");
             }
 
-            int numberOfPizza = int.Parse(rowElements[0]);
+            numberOfPizza = int.Parse(rowElements[0]);
             if (numberOfPizza < 1)
             {
-                throw new Exception("Invalid row format for row : " + trimmedRow);
+                throw new Exception("Invalid row format for row : " + orderRow);
             }
 
-            Pizza pizza;
             switch (rowElements[1])
             {
                 case "Regina": pizza = Pizza.Regina();
@@ -36,19 +36,19 @@ public class Order
                     throw new Exception("This pizza is not in the menu !");
             }
 
-            if (orderList.ContainsKey(pizza.Name))
+            if (_orderList.ContainsKey(pizza.Name))
             {
-                orderList[pizza.Name] += numberOfPizza;
+                _orderList[pizza.Name] += numberOfPizza;
             }
             else
             {
-                orderList.Add(pizza.Name, numberOfPizza);
+                _orderList.Add(pizza.Name, numberOfPizza);
             }
         }
-
-        foreach (var pair in orderList.Keys)
-        {
-            Console.WriteLine(pair + " " + orderList[pair]);
-        }
     }
+
+    public Dictionary<string, int> GetOrderList()
+    {
+        return this._orderList;
+    } 
 }

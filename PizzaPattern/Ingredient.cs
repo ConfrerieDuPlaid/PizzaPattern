@@ -2,15 +2,16 @@ namespace PizzaPattern;
 
 public class Ingredient
 {
-    private string Name { get; set; }
-    private int Quantity { get; set; }
+    public string Name { get; }
+    public double Quantity { get; }
     
-    private Unit Unit { get; set; }
+    public Unit Unit { get; }
 
-    public Ingredient(string name, int quantity, Unit unit)
+    public Ingredient(string name, double quantity, Unit unit)
     {
         Name = name;
         Quantity = quantity;
+        Unit = unit;
     }
     
 }

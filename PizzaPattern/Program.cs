@@ -16,5 +16,6 @@ while (input != "exit")
     if (input != null && input.Trim() != "")
     {
         Order order = new Order(input);
+        Bill.PrintBill(order);
     }
 }
