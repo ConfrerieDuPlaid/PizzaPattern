@@ -5,7 +5,7 @@ public interface ISerializable
     string AcceptSerializer(ISerializer serializer);
 }
 
-public interface ISerializer
+public interface ISerializer : IVisitor
 {
     string Serialize(Bill bill);
 }
