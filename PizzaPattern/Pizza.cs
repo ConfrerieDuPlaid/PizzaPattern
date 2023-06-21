@@ -43,12 +43,12 @@ public class Pizza
     {
         var ingredients = new List<Ingredient>
         {
-            new Ingredient("Tomato", 150, Unit.Grams),
-            new Ingredient("Mozzarella", 125, Unit.Grams),
-            new Ingredient("Grated cheese", 100, Unit.Grams),
-            new Ingredient("Ham", 2, Unit.Slices),
-            new Ingredient("Mushrooms", 4, Unit.Pieces),
-            new Ingredient("Olive oil", 2, Unit.Tablespoons)
+            new("Tomato", 150, Unit.Grams),
+            new("Mozzarella", 125, Unit.Grams),
+            new("Grated cheese", 100, Unit.Grams),
+            new("Ham", 2, Unit.Slices),
+            new("Mushrooms", 4, Unit.Pieces),
+            new("Olive oil", 2, Unit.Tablespoons)
         };
         var instructions = InitInstructions(ingredients);
         return new Pizza("Regina", ingredients, 8.0, instructions);
@@ -58,12 +58,12 @@ public class Pizza
     {
         var ingredients = new List<Ingredient>()
         {
-            new Ingredient("Tomato", 150, Unit.Grams),
-            new Ingredient("Mozzarella", 125, Unit.Grams),
-            new Ingredient("Ham", 2, Unit.Slices),
-            new Ingredient("Mushrooms", 100, Unit.Grams),
-            new Ingredient("Peppers", 0.5, Unit.Pieces),
-            new Ingredient("Olives", 1, Unit.Handful)
+            new("Tomato", 150, Unit.Grams),
+            new("Mozzarella", 125, Unit.Grams),
+            new("Ham", 2, Unit.Slices),
+            new("Mushrooms", 100, Unit.Grams),
+            new("Peppers", 0.5, Unit.Pieces),
+            new("Olives", 1, Unit.Handful)
         };
         var instructions = InitInstructions(ingredients);
         return new Pizza("4Seasons", ingredients, 9.0, instructions);
@@ -73,12 +73,12 @@ public class Pizza
     {
         var ingredients = new List<Ingredient>
         {
-            new Ingredient("Tomato", 150, Unit.Grams),
-            new Ingredient("Mozzarella", 100, Unit.Grams),
-            new Ingredient("Zucchini", 0.5, Unit.Pieces),
-            new Ingredient("Peppers", 1, Unit.Pieces),
-            new Ingredient("Cherry tomatoes", 6, Unit.Pieces),
-            new Ingredient("Olives", 1, Unit.Handful)
+            new("Tomato", 150, Unit.Grams),
+            new("Mozzarella", 100, Unit.Grams),
+            new("Zucchini", 0.5, Unit.Pieces),
+            new("Peppers", 1, Unit.Pieces),
+            new("Cherry tomatoes", 6, Unit.Pieces),
+            new("Olives", 1, Unit.Handful)
         };
         var instructions = InitInstructions(ingredients);
         return new Pizza("Vegetarian", ingredients, 7.5, instructions);

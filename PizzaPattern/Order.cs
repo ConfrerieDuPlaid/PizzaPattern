@@ -16,6 +16,7 @@ public class Order
             if (rowElements.Length > 2)
             {
                 throw new Exception("Invalid order format !");
+                //todo handle exception
             }
 
             numberOfPizza = int.Parse(rowElements[0]);
