@@ -18,7 +18,8 @@ while (input != "exit")
     if (input != null && input.Trim() != "")
     {
         Order order = new Order(input);
-        Bill.PrintBill(order);
+        Bill bill = new Bill(order);
+        bill.PrintBill();
         order.PrintAllInstructions();
     }
 }
