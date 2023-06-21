@@ -1,22 +1,22 @@
 namespace PizzaPattern;
 
-public class Bill
+public class Bill : ISerializable
 {
-    Dictionary<Pizza, int> orderRows = new Dictionary<Pizza, int>();
+    private Dictionary<Pizza, int> OrderRows { get; } = new Dictionary<Pizza, int>();
     public Bill(Order order)
     {
         Dictionary<string, int> orderList = order.GetOrderList();
         foreach (string pizzaName in orderList.Keys)
         {
             Pizza pizza = Pizza.Of(pizzaName);
-            this.orderRows.Add(pizza, orderList[pizzaName]);
+            this.OrderRows.Add(pizza, orderList[pizzaName]);
         }
     }
 
-    private double ComputeTotal()
+    public double ComputeTotal()
     {
         double total = 0.0;
-        foreach (var row in this.orderRows)
+        foreach (var row in this.OrderRows)
         {
             total += row.Value * row.Key.Price;
         }
@@ -26,7 +26,7 @@ public class Bill
     public void PrintBill()
     {
         Pizza pizza;
-        foreach (var row in this.orderRows)
+        foreach (var row in this.OrderRows)
         {
             pizza = row.Key;
             Console.WriteLine("{0} {1} : {0} * {2}€", row.Value, pizza.Name, pizza.Price);
@@ -36,5 +36,15 @@ public class Bill
             }
         }
         Console.WriteLine("Prix total : {0}€", this.ComputeTotal());
+    }
+
+    public string AcceptSerializer(ISerializer serializer)
+    {
+        return serializer.Serialize(this);
+    }
+
+    public Dictionary<Pizza, int> GetOrderRows()
+    {
+        return this.OrderRows;
     }
 }
