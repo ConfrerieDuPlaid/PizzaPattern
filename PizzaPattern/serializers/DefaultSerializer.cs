@@ -21,7 +21,7 @@ public class DefaultSerializer : ISerializer
         string res = $"{pizzaCount} {pizza.Name} : {pizzaCount} * {DoubleUtils.toUniversalFormat(pizza.Price)}€\n";
         foreach (var ingredient in pizza.Ingredients)
         {
-            res += this.SerializeIngredient(ingredient);
+            res += ingredient.AcceptSerializer(this);
         }
 
         return res;

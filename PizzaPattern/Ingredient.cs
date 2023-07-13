@@ -1,6 +1,6 @@
 namespace PizzaPattern;
 
-public class Ingredient
+public class Ingredient: ISerializable
 {
     public string Name { get; }
     public double Quantity { get; }
@@ -13,5 +13,9 @@ public class Ingredient
         Quantity = quantity;
         Unit = unit;
     }
-    
+
+    public string AcceptSerializer(ISerializer serializer)
+    {
+        return serializer.SerializeIngredient(this);
+    }
 }

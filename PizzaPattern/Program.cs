@@ -20,7 +20,7 @@ while (input != "exit")
     {
         Order order = new Order(input);
         Bill bill = new Bill(order);
-        ISerializer serializer = new JsonSerializer();
+        ISerializer serializer = new DefaultSerializer();
         var serialized = bill.AcceptSerializer(serializer);
         Console.WriteLine(serialized);
         order.PrintAllInstructions();

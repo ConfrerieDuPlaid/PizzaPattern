@@ -25,7 +25,7 @@ public class XmlSerializer : ISerializer
         string res = $"<pizza name=\"{pizza.Name}\" quantity={pizzaCount} unitPrice={DoubleUtils.toUniversalFormat(pizza.Price)} devise=\"EUR\">\n";
         foreach (var ingredient in pizza.Ingredients)
         {
-            res += this.SerializeIngredient(ingredient);
+            res += ingredient.AcceptSerializer(this);
         }
         res += "<\\pizza>\n";
         return res;

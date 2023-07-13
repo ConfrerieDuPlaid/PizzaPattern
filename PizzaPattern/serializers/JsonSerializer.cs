@@ -26,7 +26,7 @@ public class JsonSerializer : ISerializer
         List<string> ingredientsList = new List<string>();
         foreach (var ingredient in pizza.Ingredients)
         {
-            ingredientsList.Add(this.SerializeIngredient(ingredient));
+            ingredientsList.Add(ingredient.AcceptSerializer(this));
         }
 
         res += string.Join(",", ingredientsList);

@@ -12,12 +12,12 @@ Une pizzeria souhaite simplifier sa prise de commande et l'élaboration de ses f
 On souhaite écrire un programme qui prend en entrée une commande de pizzas et produit une facture formatée et/ou des instructions de préparation.
 
 ## Modules additionnels implémentés
-- Modification de pizzas
-- Gestion des sorties
-- Menu de navigation
+- [ ] Modification de pizzas
+- [x] Gestion des sorties
+- [ ] Menu de navigation
 
 ## Patterns implémentés
-- visiteur pour l'export des commandes
-- flyweight => ingrédients&pizza types => alléger la mémoire
-- memento => module historique de commandes ?
+- [ ] visiteur pour l'export des commandes
+- [ ] flyweight => ingrédients&pizza types => alléger la mémoire
+- [ ] memento => module historique de commandes ?
 
