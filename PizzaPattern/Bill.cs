@@ -23,21 +23,6 @@ public class Bill : ISerializable
         return total;
     } 
     
-    public void PrintBill()
-    {
-        Pizza pizza;
-        foreach (var row in this.OrderRows)
-        {
-            pizza = row.Key;
-            Console.WriteLine("{0} {1} : {0} * {2}€", row.Value, pizza.Name, pizza.Price);
-            foreach (var ingredient in pizza.Ingredients)
-            {
-                Console.WriteLine("{0} {1} {2}", ingredient.Name, ingredient.Unit, ingredient.Quantity);
-            }
-        }
-        Console.WriteLine("Prix total : {0}€", this.ComputeTotal());
-    }
-
     public string AcceptSerializer(ISerializer serializer)
     {
         return serializer.Serialize(this);

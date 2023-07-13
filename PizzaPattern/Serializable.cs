@@ -8,4 +8,8 @@ public interface ISerializable
 public interface ISerializer : IVisitor
 {
     string Serialize(Bill bill);
+
+    string SerializePizza(Pizza pizza, int pizzaCount);
+
+    string SerializeIngredient(Ingredient ingredient);
 }
