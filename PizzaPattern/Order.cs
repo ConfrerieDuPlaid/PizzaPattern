@@ -2,22 +2,17 @@ namespace PizzaPattern;
 
 public class Order
 {
-    private readonly Dictionary<string, int> _orderList = new Dictionary<string, int>();
-    
+    private readonly List<Pizza> _orderList = new List<Pizza>();
     public Order(string order)
     {
         string[] orderRows = order.Split(",");
 
         Pizza pizza;
         int numberOfPizza = 0;
+        string basePizzaName = "";
         foreach (string orderRow in orderRows)
         {
             string[] rowElements = orderRow.Trim().Split(" ");
-            if (rowElements.Length > 2)
-            {
-                throw new Exception("Invalid order format !");
-                //todo handle exception
-            }
 
             numberOfPizza = int.Parse(rowElements[0]);
             if (numberOfPizza < 1)
@@ -25,29 +20,32 @@ public class Order
                 throw new Exception("Invalid row format for row : " + orderRow);
             }
 
-            pizza = Pizza.Of(rowElements[1]);
-            if (_orderList.ContainsKey(pizza.Name))
+            basePizzaName = rowElements[1];
+            string[] updateIngredients = Array.Empty<string>();
+            if (rowElements.Length > 2) updateIngredients = rowElements.Skip(2).ToArray();
+            Console.WriteLine(updateIngredients.Length);
+            pizza = new Pizza(basePizzaName, numberOfPizza, updateIngredients);
+            int index = this._orderList.IndexOf(pizza);
+            if (index != -1)
             {
-                _orderList[pizza.Name] += numberOfPizza;
+                this._orderList[index].Count += numberOfPizza;
             }
             else
             {
-                _orderList.Add(pizza.Name, numberOfPizza);
+                this._orderList.Add(pizza);
             }
         }
     }
 
     public void PrintAllInstructions()
     {
-        Pizza pizza;
-        foreach (string pizzaName in _orderList.Keys)
+        foreach (var pizza in this._orderList)
         {
-            pizza = Pizza.Of(pizzaName);
-            pizza.PrintInstructions();
+            new Instructions(pizza).Print();
         }
     }
 
-    public Dictionary<string, int> GetOrderList()
+    public List<Pizza> GetOrderList()
     {
         return this._orderList;
     } 

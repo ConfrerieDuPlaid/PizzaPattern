@@ -8,21 +8,29 @@ Menu menu = new Menu();
 string? input = "";
 while (input != "exit")
 {
-    menu.PrintMenu();
-    Console.WriteLine("Placez votre commande ('exit' pour sortir) :");
-    input = Console.ReadLine();
-    if (input == "exit")
+    try
     {
-        break;
-    }
+        menu.PrintMenu();
+        Console.WriteLine("Placez votre commande ('exit' pour sortir) :");
+        input = Console.ReadLine();
+        if (input == "exit")
+        {
+            break;
+        }
 
-    if (input != null && input.Trim() != "")
+        if (input != null && input.Trim() != "")
+        {
+            Order order = new Order(input);
+            Bill bill = new Bill(order);
+            ISerializer serializer = new DefaultSerializer();
+            var serialized = bill.AcceptSerializer(serializer);
+            Console.WriteLine(serialized);
+            order.PrintAllInstructions();
+        }
+    }
+    catch (Exception e)
     {
-        Order order = new Order(input);
-        Bill bill = new Bill(order);
-        ISerializer serializer = new DefaultSerializer();
-        var serialized = bill.AcceptSerializer(serializer);
-        Console.WriteLine(serialized);
-        order.PrintAllInstructions();
+        Console.WriteLine("Une erreur est survenue : " + e.Message);
+        Console.WriteLine("Veuillez recommencer votre commande.");
     }
 }

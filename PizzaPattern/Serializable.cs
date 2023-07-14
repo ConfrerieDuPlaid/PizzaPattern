@@ -9,7 +9,7 @@ public interface ISerializer : IVisitor
 {
     string Serialize(Bill bill);
 
-    string SerializePizza(Pizza pizza, int pizzaCount);
+    string SerializePizza(Pizza pizza);
 
     string SerializeIngredient(Ingredient ingredient);
 }

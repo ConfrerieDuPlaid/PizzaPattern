@@ -2,23 +2,19 @@ namespace PizzaPattern;
 
 public class Bill : ISerializable
 {
-    private Dictionary<Pizza, int> OrderRows { get; } = new Dictionary<Pizza, int>();
+    private Dictionary<StandardPizza, int> OrderRows { get; } = new Dictionary<StandardPizza, int>();
+    private Order Order;
     public Bill(Order order)
     {
-        Dictionary<string, int> orderList = order.GetOrderList();
-        foreach (string pizzaName in orderList.Keys)
-        {
-            Pizza pizza = Pizza.Of(pizzaName);
-            this.OrderRows.Add(pizza, orderList[pizzaName]);
-        }
+        this.Order = order;
     }
 
     public double ComputeTotal()
     {
         double total = 0.0;
-        foreach (var row in this.OrderRows)
+        foreach (var pizza in this.Order.GetOrderList())
         {
-            total += row.Value * row.Key.Price;
+            total += pizza.Price * pizza.Count;
         }
         return total;
     } 
@@ -28,8 +24,8 @@ public class Bill : ISerializable
         return serializer.Serialize(this);
     }
 
-    public Dictionary<Pizza, int> GetOrderRows()
+    public List<Pizza> GetOrderRows()
     {
-        return this.OrderRows;
+        return this.Order.GetOrderList();
     }
 }

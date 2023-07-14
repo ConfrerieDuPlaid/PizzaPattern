@@ -1,101 +1,75 @@
 namespace PizzaPattern;
 
-public class Pizza
+public class Pizza : IPizza
 {
-    public string Name { get; }
-    public List<Ingredient> Ingredients { get; }
-    public double Price { get; }
-    
-    public List<string> Instructions { get; }
-    
-    public Pizza(string name, List<Ingredient> ingredients, double price, List<string> instructions)
+    public string Name { get; private set; }
+    public List<Ingredient> Ingredients { get; private set; }
+    public double Price { get; private set; }
+    public int Count { get; set; }
+
+    public Pizza(string basePizzaName, int pizzasCount, string[] updateIngredients)
     {
-        Name = name;
-        Ingredients = ingredients;
-        Price = price;
-        Instructions = instructions;
+        StandardPizza basePizza = StandardPizza.Of(basePizzaName);
+        this.SetFromStandardPizza(basePizza);
+        this.UpdateIngredients(updateIngredients);
+        this.Count = pizzasCount;
     }
 
-    public void PrintInstructions()
+    private bool Equals(Pizza other)
     {
-        Console.WriteLine(Name);
-        foreach (var instruction in Instructions)
+        return Name == other.Name && Ingredients.Equals(other.Ingredients) && Price.Equals(other.Price);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((Pizza)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, Ingredients, Price);
+    }
+
+    private void SetFromStandardPizza (StandardPizza basePizza)
+    {
+        this.Name = "Custom " + basePizza.Name;
+        this.Ingredients = basePizza.Ingredients;
+        this.Price = basePizza.Price;
+    }
+
+    private void UpdateIngredients(string[] updateIngredients)
+    {
+        string ingredientName = "";
+        foreach (var updateIngredient in updateIngredients)
         {
-            Console.WriteLine(instruction);
+            char action = updateIngredient[0];
+            ingredientName = updateIngredient.Substring(1);
+            switch (action)
+            {
+                case '-': this.RemoveIngredient(ingredientName);
+                    break;
+                case '+': this.AddIngredient(ingredientName);
+                    break;
+                default: throw new Exception("Invalid ingredient action");
+            }
+            this.Price += 0.5;
+            
         }
     }
 
-    private static List<string> InitInstructions(List<Ingredient> ingredients)
+    private void AddIngredient(string ingredientName)
     {
-        var instructions = new List<string>()
-        {
-            "Prepare the dough"
-        };
-        foreach (var ingredient in ingredients)
-        {
-            instructions.Add("Add the " + ingredient.Name);
-        }
-        instructions.Add("Bake the pizza");
-        return instructions;
-    }
-    
-    public static Pizza Regina()
-    {
-        var ingredients = new List<Ingredient>
-        {
-            new("Tomato", 150, Unit.Grams),
-            new("Mozzarella", 125, Unit.Grams),
-            new("Grated cheese", 100, Unit.Grams),
-            new("Ham", 2, Unit.Slices),
-            new("Mushrooms", 4, Unit.Pieces),
-            new("Olive oil", 2, Unit.Tablespoons)
-        };
-        var instructions = InitInstructions(ingredients);
-        return new Pizza("Regina", ingredients, 8.0, instructions);
+        this.Ingredients.Add(new Ingredient("Extra " + ingredientName, 50, Unit.Grams));
     }
 
-    public static Pizza FourSeasons()
+    private void RemoveIngredient(string ingredientName)
     {
-        var ingredients = new List<Ingredient>()
+        foreach (var defaultIngredient in this.Ingredients)
         {
-            new("Tomato", 150, Unit.Grams),
-            new("Mozzarella", 125, Unit.Grams),
-            new("Ham", 2, Unit.Slices),
-            new("Mushrooms", 100, Unit.Grams),
-            new("Peppers", 0.5, Unit.Pieces),
-            new("Olives", 1, Unit.Handful)
-        };
-        var instructions = InitInstructions(ingredients);
-        return new Pizza("4Seasons", ingredients, 9.0, instructions);
-    }
-
-    public static Pizza Vegetarian()
-    {
-        var ingredients = new List<Ingredient>
-        {
-            new("Tomato", 150, Unit.Grams),
-            new("Mozzarella", 100, Unit.Grams),
-            new("Zucchini", 0.5, Unit.Pieces),
-            new("Peppers", 1, Unit.Pieces),
-            new("Cherry tomatoes", 6, Unit.Pieces),
-            new("Olives", 1, Unit.Handful)
-        };
-        var instructions = InitInstructions(ingredients);
-        return new Pizza("Vegetarian", ingredients, 7.5, instructions);
-    }
-
-    public static Pizza Of (string pizzaName)
-    {
-        switch (pizzaName)
-        {
-            case "Regina":
-                return Pizza.Regina();
-            case "4Seasons":
-                return Pizza.FourSeasons();
-            case "Vegetarian":
-                return Pizza.Vegetarian();
-            default:
-                throw new Exception("This pizza is not in the menu !");
+            if (defaultIngredient.Name == ingredientName) this.Ingredients.Remove(defaultIngredient);
         }
     }
 }

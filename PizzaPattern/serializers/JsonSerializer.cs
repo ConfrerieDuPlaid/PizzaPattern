@@ -5,12 +5,10 @@ public class JsonSerializer : ISerializer
     public string Serialize(Bill bill)
     {
         string res = "{";
-        Pizza pizza;
         List<string> pizzaList = new List<string>();
-        foreach (var row in bill.GetOrderRows())
+        foreach (var pizza in bill.GetOrderRows())
         {
-            pizza = row.Key;
-            pizzaList.Add(this.SerializePizza(pizza, row.Value));
+            pizzaList.Add(this.SerializePizza(pizza));
         }
 
         res += string.Join(",", pizzaList) + ",";
@@ -18,10 +16,10 @@ public class JsonSerializer : ISerializer
         return res;
     }
 
-    public string SerializePizza(Pizza pizza, int pizzaCount)
+    public string SerializePizza(Pizza pizza)
     {
         string res = $"\"{pizza.Name}\":{{";
-        res += $"\"quantity:\": {pizzaCount}, \"unitPrice\": {DoubleUtils.toUniversalFormat(pizza.Price)},";
+        res += $"\"quantity:\": {pizza.Count}, \"unitPrice\": {DoubleUtils.toUniversalFormat(pizza.Price)},";
         res += "\"ingredients\": [";
         List<string> ingredientsList = new List<string>();
         foreach (var ingredient in pizza.Ingredients)

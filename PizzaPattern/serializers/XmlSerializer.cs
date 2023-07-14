@@ -9,20 +9,18 @@ public class XmlSerializer : ISerializer
     {
         string res = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
         res += $"<bill total={DoubleUtils.toUniversalFormat(bill.ComputeTotal())} devise=\"EUR\">\n";
-        Pizza pizza;
-        foreach (var row in bill.GetOrderRows())
+        foreach (var pizza in bill.GetOrderRows())
         {
-            pizza = row.Key;
-            res += this.SerializePizza(pizza, row.Value);
+            res += this.SerializePizza(pizza);
 
         }
         res += "<\\bill>";
         return res;
     }
 
-    public string SerializePizza(Pizza pizza, int pizzaCount)
+    public string SerializePizza(Pizza pizza)
     {
-        string res = $"<pizza name=\"{pizza.Name}\" quantity={pizzaCount} unitPrice={DoubleUtils.toUniversalFormat(pizza.Price)} devise=\"EUR\">\n";
+        string res = $"<pizza name=\"{pizza.Name}\" quantity={pizza.Count} unitPrice={DoubleUtils.toUniversalFormat(pizza.Price)} devise=\"EUR\">\n";
         foreach (var ingredient in pizza.Ingredients)
         {
             res += ingredient.AcceptSerializer(this);
