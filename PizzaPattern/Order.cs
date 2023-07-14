@@ -23,7 +23,6 @@ public class Order
             basePizzaName = rowElements[1];
             string[] updateIngredients = Array.Empty<string>();
             if (rowElements.Length > 2) updateIngredients = rowElements.Skip(2).ToArray();
-            Console.WriteLine(updateIngredients.Length);
             pizza = new Pizza(basePizzaName, numberOfPizza, updateIngredients);
             int index = this._orderList.IndexOf(pizza);
             if (index != -1)
@@ -34,6 +33,7 @@ public class Order
             {
                 this._orderList.Add(pizza);
             }
+            Console.WriteLine("Ok");
         }
     }
 

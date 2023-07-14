@@ -10,7 +10,7 @@ public class Pizza : IPizza
     public Pizza(string basePizzaName, int pizzasCount, string[] updateIngredients)
     {
         StandardPizza basePizza = StandardPizza.Of(basePizzaName);
-        this.SetFromStandardPizza(basePizza);
+        this.SetFromStandardPizza(basePizza, updateIngredients.Length > 0);
         this.UpdateIngredients(updateIngredients);
         this.Count = pizzasCount;
     }
@@ -33,9 +33,10 @@ public class Pizza : IPizza
         return HashCode.Combine(Name, Ingredients, Price);
     }
 
-    private void SetFromStandardPizza (StandardPizza basePizza)
+    private void SetFromStandardPizza (StandardPizza basePizza, bool isCustom)
     {
-        this.Name = "Custom " + basePizza.Name;
+        if (isCustom) this.Name = "Custom " + basePizza.Name;
+        else this.Name = basePizza.Name;
         this.Ingredients = basePizza.Ingredients;
         this.Price = basePizza.Price;
     }
@@ -65,11 +66,11 @@ public class Pizza : IPizza
         this.Ingredients.Add(new Ingredient("Extra " + ingredientName, 50, Unit.Grams));
     }
 
+
     private void RemoveIngredient(string ingredientName)
     {
-        foreach (var defaultIngredient in this.Ingredients)
-        {
-            if (defaultIngredient.Name == ingredientName) this.Ingredients.Remove(defaultIngredient);
-        }
+        Ingredient comparison = new Ingredient(ingredientName, 0, Unit.Grams);
+        int index = this.Ingredients.IndexOf(comparison);
+        if (index != -1) this.Ingredients.RemoveAt(index);
     }
 }

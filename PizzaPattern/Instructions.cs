@@ -8,13 +8,13 @@ public class Instructions
         this.PreparationInstructions = new List<string>()
         {
             "Instructions for a " + pizza.Name,
-            "Prepare the dough"
+            "- Prepare the dough"
         };
         foreach (var ingredient in pizza.Ingredients)
         {
-            PreparationInstructions.Add("Add the " + ingredient.Name);
+            PreparationInstructions.Add("- Add the " + ingredient.Name);
         }
-        PreparationInstructions.Add("Bake the pizza");
+        PreparationInstructions.Add("- Bake the pizza");
     }
 
     public void Print ()
