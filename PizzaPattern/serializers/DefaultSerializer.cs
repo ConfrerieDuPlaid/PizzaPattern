@@ -7,7 +7,7 @@ public class DefaultSerializer : ISerializer
         string res = "";
         foreach (var pizza in bill.GetOrderRows())
         {
-            res += this.SerializePizza(pizza);
+            res += pizza.AcceptSerializer(this);
         }
 
         res += $"Prix total : {DoubleUtils.toUniversalFormat(bill.ComputeTotal())}€";

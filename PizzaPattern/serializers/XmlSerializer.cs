@@ -11,7 +11,7 @@ public class XmlSerializer : ISerializer
         res += $"<bill total={DoubleUtils.toUniversalFormat(bill.ComputeTotal())} devise=\"EUR\">\n";
         foreach (var pizza in bill.GetOrderRows())
         {
-            res += this.SerializePizza(pizza);
+            res += pizza.AcceptSerializer(this);
 
         }
         res += "<\\bill>";

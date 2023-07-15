@@ -22,7 +22,7 @@ while (input != "exit")
         {
             Order order = new Order(input);
             Bill bill = new Bill(order);
-            ISerializer serializer = new DefaultSerializer();
+            ISerializer serializer = new JsonSerializer();
             var serialized = bill.AcceptSerializer(serializer);
             Console.WriteLine(serialized);
             order.PrintAllInstructions();

@@ -1,6 +1,6 @@
 namespace PizzaPattern;
 
-public class Pizza : IPizza
+public class Pizza : IPizza, ISerializable
 {
     public string Name { get; private set; }
     public List<Ingredient> Ingredients { get; private set; }
@@ -72,5 +72,10 @@ public class Pizza : IPizza
         Ingredient comparison = new Ingredient(ingredientName, 0, Unit.Grams);
         int index = this.Ingredients.IndexOf(comparison);
         if (index != -1) this.Ingredients.RemoveAt(index);
+    }
+
+    public string AcceptSerializer(ISerializer serializer)
+    {
+        return serializer.SerializePizza(this);
     }
 }

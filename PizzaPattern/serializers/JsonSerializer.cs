@@ -8,7 +8,7 @@ public class JsonSerializer : ISerializer
         List<string> pizzaList = new List<string>();
         foreach (var pizza in bill.GetOrderRows())
         {
-            pizzaList.Add(this.SerializePizza(pizza));
+            pizzaList.Add(pizza.AcceptSerializer(this));
         }
 
         res += string.Join(",", pizzaList) + ",";
