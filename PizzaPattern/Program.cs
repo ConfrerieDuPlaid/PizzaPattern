@@ -1,4 +1,14 @@
-﻿using PizzaPattern.history;
-using PizzaPattern.nav;
+﻿using PizzaPattern.nav;
 
-new MainNavigation().Main();
+while (true)
+{
+    try
+    {
+        new MainNavigation().Main();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("An error occured : " + e.Message);
+        Console.ReadLine();
+    }
+}

@@ -48,8 +48,8 @@ public class OrderNavigation : InteractiveNavigation, ICaretaker
         }
         catch (Exception e)
         {
-            Console.WriteLine("Une erreur est survenue : " + e.Message);
-            Console.WriteLine("Veuillez recommencer votre commande.");
+            Console.WriteLine("An error occured : " + e.Message);
+            Console.WriteLine("Please enter your order again.");
             ReadOrder();
         }
     }

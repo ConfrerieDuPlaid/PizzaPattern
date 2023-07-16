@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace PizzaPattern.history;
 
 public class OrderHistory
@@ -13,17 +15,32 @@ public class OrderHistory
 
     public void Export()
     {
+        Console.WriteLine("Enter the file to write into :");
+        string filename = Console.ReadLine() ?? "";
+        if (filename == "") throw new Exception("Invalid file name !");
+        using (FileStream fs = File.Create(filename)) 
+        {
+            string dataString = Serialize();
+            byte[] info = new UTF8Encoding(true).GetBytes(dataString);
+            fs.Write(info, 0, info.Length);
+        }
         _orderSnapshots.Clear();
-        throw new NotImplementedException();
     }
 
     public void Print()
     {
         Console.WriteLine("History of orders :");
-        foreach (var snapshot in _orderSnapshots)
+        Console.WriteLine(Serialize("> "));
+    }
+
+    private string Serialize(string prefix = "")
+    {
+        List<string> snapshots = new List<string>();
+;       foreach (var snapshot in _orderSnapshots)
         {
-            Console.WriteLine("> " + snapshot.State());
+            snapshots.Add(prefix + snapshot.State());
         }
+        return string.Join("\n", snapshots);
     }
 
     private static OrderHistory? _instance = null;

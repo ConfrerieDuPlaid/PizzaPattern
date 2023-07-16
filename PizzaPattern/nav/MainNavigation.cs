@@ -42,7 +42,7 @@ public class MainNavigation : InteractiveNavigation
     {
         Console.Clear();
         OrderHistory.GetInstance().Export();
-        Console.WriteLine("Exporté !");
+        Console.WriteLine("Exported !");
         ExitPrint();
     }
 }
