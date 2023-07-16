@@ -1,11 +1,12 @@
+using PizzaPattern.history;
 using PizzaPattern.serializers;
 
 namespace PizzaPattern.nav;
 
-public class InteractiveOrderMenu : InteractiveNavigation
+public class OrderNavigation : InteractiveNavigation, ICaretaker
 {
-    protected override List<Option> Options { get; set; }
-    protected override string MenuHeader { get; set; }
+    protected override List<Option> Options { get; set; } = new();
+    protected override string MenuHeader { get; set; } = "";
     private Order Order { get; set; }
     private Bill Bill { get; set; }
 
@@ -32,7 +33,6 @@ public class InteractiveOrderMenu : InteractiveNavigation
     public void ReadOrder()
     {
         string? input;
-
         try
         {
             new Menu().Print();
@@ -43,12 +43,14 @@ public class InteractiveOrderMenu : InteractiveNavigation
             SetMenuHeader(input);
             Order = new Order(input);
             Bill = new Bill(Order);
+            OrderHistory.GetInstance().Add(Order.CreateSnapshot());
             Main();
         }
         catch (Exception e)
         {
             Console.WriteLine("Une erreur est survenue : " + e.Message);
             Console.WriteLine("Veuillez recommencer votre commande.");
+            ReadOrder();
         }
     }
 
@@ -68,10 +70,8 @@ public class InteractiveOrderMenu : InteractiveNavigation
         ExitPrint();
     }
 
-    private void ExitPrint()
+    public void Save()
     {
-        string? input = null;
-        while (input == null) input = Console.ReadLine();
-        Main();
+        OrderHistory.GetInstance().Add(Order.CreateSnapshot());
     }
 }

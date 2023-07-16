@@ -1,3 +1,5 @@
+using PizzaPattern.serializers;
+
 namespace PizzaPattern;
 
 public class Pizza : IPizza, ISerializable
@@ -6,11 +8,13 @@ public class Pizza : IPizza, ISerializable
     public List<Ingredient> Ingredients { get; private set; }
     public double Price { get; private set; }
     public int Count { get; set; }
+    private bool IsCustom { get; } 
 
     public Pizza(string basePizzaName, int pizzasCount, string[] updateIngredients)
     {
         StandardPizza basePizza = StandardPizza.Of(basePizzaName);
-        SetFromStandardPizza(basePizza, updateIngredients.Length > 0);
+        IsCustom = updateIngredients.Length > 0;
+        SetFromStandardPizza(basePizza);
         UpdateIngredients(updateIngredients);
         Count = pizzasCount;
     }
@@ -33,9 +37,9 @@ public class Pizza : IPizza, ISerializable
         return HashCode.Combine(Name, Ingredients, Price);
     }
 
-    private void SetFromStandardPizza (StandardPizza basePizza, bool isCustom)
+    private void SetFromStandardPizza (StandardPizza basePizza)
     {
-        if (isCustom) Name = "Custom " + basePizza.Name;
+        if (IsCustom) Name = "Custom " + basePizza.Name;
         else Name = basePizza.Name;
         Ingredients = basePizza.Ingredients;
         Price = basePizza.Price;
@@ -57,7 +61,6 @@ public class Pizza : IPizza, ISerializable
                 default: throw new Exception("Invalid ingredient action");
             }
             Price += 0.5;
-            
         }
     }
 

@@ -1,4 +1,4 @@
-namespace PizzaPattern;
+namespace PizzaPattern.serializers;
 
 public interface ISerializable
 {

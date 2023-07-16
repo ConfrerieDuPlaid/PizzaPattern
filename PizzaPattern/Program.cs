@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using PizzaPattern;
+﻿using PizzaPattern.history;
 using PizzaPattern.nav;
 
-new InteractiveMainMenu().Main();
+new MainNavigation().Main();

@@ -75,6 +75,13 @@ public abstract class InteractiveNavigation
             Console.WriteLine(option.Name);
         }
     }
+
+    protected void ExitPrint()
+    {
+        string? input = null;
+        while (input == null) input = Console.ReadLine();
+        Main();
+    }
 }
 
 public class Option

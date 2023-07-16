@@ -1,8 +1,12 @@
+using PizzaPattern.history;
+
 namespace PizzaPattern;
 
-public class Order
+public class Order : IOriginator
 {
     private readonly List<Pizza> _orderList = new ();
+
+    private readonly string _input;
     public Order(string order)
     {
         string[] orderRows = order.Split(",");
@@ -33,8 +37,9 @@ public class Order
             {
                 _orderList.Add(pizza);
             }
-            Console.WriteLine("Ok");
         }
+
+        _input = order;
     }
 
     public void PrintAllInstructions()
@@ -48,5 +53,21 @@ public class Order
     public List<Pizza> GetOrderList()
     {
         return _orderList;
-    } 
+    }
+
+    public OrderSnapshot CreateSnapshot()
+    {
+        return new OrderSnapshot(_input);
+    }
+
+    public void Restore(OrderSnapshot snapshot)
+    {
+        _orderList.Clear();
+        _orderList.AddRange(new Order(snapshot.State())._orderList);
+    }
+
+    public static Order Of(OrderSnapshot snapshot)
+    {
+        return new Order(snapshot.State());
+    }
 }
