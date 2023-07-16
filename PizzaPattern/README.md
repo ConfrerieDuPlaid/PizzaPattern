@@ -20,6 +20,6 @@ On souhaite écrire un programme qui prend en entrée une commande de pizzas et 
 
 ## Patterns implémentés
 - [x] Pattern **visiteur** pour l'export des commandes
-- [ ] **flyweight** => ingrédients&pizza types => alléger la mémoire
 - [x] Pattern **memento** pour l'historique de commandes
+- [ ] **flyweight** => ingrédients&pizza types => alléger la mémoire ?
 

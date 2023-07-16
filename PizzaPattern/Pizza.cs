@@ -21,7 +21,7 @@ public class Pizza : IPizza, ISerializable
 
     private bool Equals(Pizza other)
     {
-        return Name == other.Name && Ingredients.Equals(other.Ingredients) && Price.Equals(other.Price);
+        return Name == other.Name && !Ingredients.Except(other.Ingredients).Any() && Price.Equals(other.Price);
     }
 
     public override bool Equals(object? obj)
@@ -29,7 +29,8 @@ public class Pizza : IPizza, ISerializable
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != GetType()) return false;
-        return Equals((Pizza)obj);
+        var eq = Equals((Pizza)obj);
+        return eq;
     }
 
     public override int GetHashCode()

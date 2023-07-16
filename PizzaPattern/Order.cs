@@ -10,7 +10,6 @@ public class Order : IOriginator
     public Order(string order)
     {
         string[] orderRows = order.Split(",");
-
         Pizza pizza;
         int numberOfPizza = 0;
         string basePizzaName = "";
