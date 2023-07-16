@@ -5,7 +5,7 @@ public class Instructions
     private List<string> PreparationInstructions { get; }
     public Instructions(IPizza pizza)
     {
-        this.PreparationInstructions = new List<string>()
+        PreparationInstructions = new List<string>()
         {
             "Instructions for a " + pizza.Name,
             "- Prepare the dough"
@@ -19,7 +19,7 @@ public class Instructions
 
     public void Print ()
     {
-        foreach (var instruction in this.PreparationInstructions)
+        foreach (var instruction in PreparationInstructions)
         {
             Console.WriteLine(instruction);
         }

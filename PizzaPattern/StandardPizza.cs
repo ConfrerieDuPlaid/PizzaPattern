@@ -5,14 +5,12 @@ public class StandardPizza : IPizza
     public string Name { get; }
     public List<Ingredient> Ingredients { get; }
     public double Price { get; }
-    public List<string> Instructions { get; }
 
-    private StandardPizza(string name, List<Ingredient> ingredients, double price, List<string> instructions)
+    private StandardPizza(string name, List<Ingredient> ingredients, double price)
     {
         Name = name;
         Ingredients = ingredients;
         Price = price;
-        Instructions = instructions;
     }
 
     private bool Equals(StandardPizza other)
@@ -24,17 +22,8 @@ public class StandardPizza : IPizza
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
+        if (obj.GetType() != GetType()) return false;
         return Equals((StandardPizza)obj);
-    }
-
-    public void PrintInstructions()
-    {
-        Console.WriteLine(Name);
-        foreach (var instruction in Instructions)
-        {
-            Console.WriteLine(instruction);
-        }
     }
 
     private static List<string> InitInstructions(List<Ingredient> ingredients)
@@ -67,13 +56,12 @@ public class StandardPizza : IPizza
             new("Mushrooms", 4, Unit.Pieces),
             new("Olive oil", 2, Unit.Tablespoons)
         };
-        var instructions = InitInstructions(ingredients);
-        return new StandardPizza("Regina", ingredients, 8.0, instructions);
+        return new StandardPizza("Regina", ingredients, 8.0);
     }
 
     public static StandardPizza FourSeasons()
     {
-        var ingredients = new List<Ingredient>()
+        var ingredients = new List<Ingredient>
         {
             new("Tomato", 150, Unit.Grams),
             new("Mozzarella", 125, Unit.Grams),
@@ -82,8 +70,7 @@ public class StandardPizza : IPizza
             new("Peppers", 0.5, Unit.Pieces),
             new("Olives", 1, Unit.Handful)
         };
-        var instructions = InitInstructions(ingredients);
-        return new StandardPizza("4Seasons", ingredients, 9.0, instructions);
+        return new StandardPizza("4Seasons", ingredients, 9.0);
     }
 
     public static StandardPizza Vegetarian()
@@ -97,8 +84,7 @@ public class StandardPizza : IPizza
             new("Cherry tomatoes", 6, Unit.Pieces),
             new("Olives", 1, Unit.Handful)
         };
-        var instructions = InitInstructions(ingredients);
-        return new StandardPizza("Vegetarian", ingredients, 7.5, instructions);
+        return new StandardPizza("Vegetarian", ingredients, 7.5);
     }
 
     public static StandardPizza Of (string pizzaName)
@@ -106,11 +92,11 @@ public class StandardPizza : IPizza
         switch (pizzaName)
         {
             case "Regina":
-                return StandardPizza.Regina();
+                return Regina();
             case "4Seasons":
-                return StandardPizza.FourSeasons();
+                return FourSeasons();
             case "Vegetarian":
-                return StandardPizza.Vegetarian();
+                return Vegetarian();
             default:
                 throw new Exception("This pizza is not in the menu !");
         }

@@ -55,14 +55,7 @@ public abstract class InteractiveNavigation
 
         Console.ReadKey();
     }
-    
-    // Default action of all the Options. You can create more methods
-    public void InvokeAction(Action action)
-    {
-        Console.Clear();
-        action.Invoke();
-    }
-    
+
     protected void WriteMenu(List<Option> Options, Option selectedOption)
     {
         Console.Clear();

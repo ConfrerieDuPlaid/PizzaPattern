@@ -10,9 +10,9 @@ public class Pizza : IPizza, ISerializable
     public Pizza(string basePizzaName, int pizzasCount, string[] updateIngredients)
     {
         StandardPizza basePizza = StandardPizza.Of(basePizzaName);
-        this.SetFromStandardPizza(basePizza, updateIngredients.Length > 0);
-        this.UpdateIngredients(updateIngredients);
-        this.Count = pizzasCount;
+        SetFromStandardPizza(basePizza, updateIngredients.Length > 0);
+        UpdateIngredients(updateIngredients);
+        Count = pizzasCount;
     }
 
     private bool Equals(Pizza other)
@@ -24,7 +24,7 @@ public class Pizza : IPizza, ISerializable
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
+        if (obj.GetType() != GetType()) return false;
         return Equals((Pizza)obj);
     }
 
@@ -35,10 +35,10 @@ public class Pizza : IPizza, ISerializable
 
     private void SetFromStandardPizza (StandardPizza basePizza, bool isCustom)
     {
-        if (isCustom) this.Name = "Custom " + basePizza.Name;
-        else this.Name = basePizza.Name;
-        this.Ingredients = basePizza.Ingredients;
-        this.Price = basePizza.Price;
+        if (isCustom) Name = "Custom " + basePizza.Name;
+        else Name = basePizza.Name;
+        Ingredients = basePizza.Ingredients;
+        Price = basePizza.Price;
     }
 
     private void UpdateIngredients(string[] updateIngredients)
@@ -50,28 +50,28 @@ public class Pizza : IPizza, ISerializable
             ingredientName = updateIngredient.Substring(1);
             switch (action)
             {
-                case '-': this.RemoveIngredient(ingredientName);
+                case '-': RemoveIngredient(ingredientName);
                     break;
-                case '+': this.AddIngredient(ingredientName);
+                case '+': AddIngredient(ingredientName);
                     break;
                 default: throw new Exception("Invalid ingredient action");
             }
-            this.Price += 0.5;
+            Price += 0.5;
             
         }
     }
 
     private void AddIngredient(string ingredientName)
     {
-        this.Ingredients.Add(new Ingredient("Extra " + ingredientName, 50, Unit.Grams));
+        Ingredients.Add(new Ingredient("Extra " + ingredientName, 50, Unit.Grams));
     }
 
 
     private void RemoveIngredient(string ingredientName)
     {
         Ingredient comparison = new Ingredient(ingredientName, 0, Unit.Grams);
-        int index = this.Ingredients.IndexOf(comparison);
-        if (index != -1) this.Ingredients.RemoveAt(index);
+        int index = Ingredients.IndexOf(comparison);
+        if (index != -1) Ingredients.RemoveAt(index);
     }
 
     public string AcceptSerializer(ISerializer serializer)

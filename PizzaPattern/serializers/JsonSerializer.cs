@@ -12,14 +12,14 @@ public class JsonSerializer : ISerializer
         }
 
         res += string.Join(",", pizzaList) + ",";
-        res += $"\"total\": \"{DoubleUtils.toUniversalFormat(bill.ComputeTotal())}€\"}}";
+        res += $"\"total\": \"{DoubleUtils.ToUniversalFormat(bill.ComputeTotal())}€\"}}";
         return res;
     }
 
     public string SerializePizza(Pizza pizza)
     {
         string res = $"\"{pizza.Name}\":{{";
-        res += $"\"quantity:\": {pizza.Count}, \"unitPrice\": {DoubleUtils.toUniversalFormat(pizza.Price)},";
+        res += $"\"quantity:\": {pizza.Count}, \"unitPrice\": {DoubleUtils.ToUniversalFormat(pizza.Price)},";
         res += "\"ingredients\": [";
         List<string> ingredientsList = new List<string>();
         foreach (var ingredient in pizza.Ingredients)
@@ -34,6 +34,6 @@ public class JsonSerializer : ISerializer
 
     public string SerializeIngredient(Ingredient ingredient)
     {
-        return $"{{\"name\": \"{ingredient.Name}\", \"unit\": \"{ingredient.Unit}\", \"quantity\": {DoubleUtils.toUniversalFormat(ingredient.Quantity)}}}";
+        return $"{{\"name\": \"{ingredient.Name}\", \"unit\": \"{ingredient.Unit}\", \"quantity\": {DoubleUtils.ToUniversalFormat(ingredient.Quantity)}}}";
     }
 }

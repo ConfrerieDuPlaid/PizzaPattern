@@ -6,46 +6,44 @@ public class InteractiveOrderMenu : InteractiveNavigation
 {
     protected override List<Option> Options { get; set; }
     protected override string MenuHeader { get; set; }
+    private Order Order { get; set; }
+    private Bill Bill { get; set; }
+
+    private readonly DefaultSerializer _defaultSerializer = new ();
+    private readonly JsonSerializer _jsonSerializer = new ();
+    private readonly XmlSerializer _xmlSerializer = new ();
 
     protected override void SetOptions()
     {
         Options = new List<Option>
         {
-            new Option("Print bill", () => this.PrintBill(_defaultSerializer)),
-            new Option("Print bill as JSON", () => this.PrintBill(_jsonSerializer)),
-            new Option("Print bill as XML", () => this.PrintBill(_xmlSerializer)),
-            new Option("Print preparation instructions", this.PrintInstructions),
+            new ("Print bill", () => PrintBill(_defaultSerializer)),
+            new ("Print bill as JSON", () => PrintBill(_jsonSerializer)),
+            new ("Print bill as XML", () => PrintBill(_xmlSerializer)),
+            new ("Print preparation instructions", PrintInstructions),
         };
     }
 
     protected override void SetMenuHeader(string? input)
     {
-        this.MenuHeader = "Your order : " + input + "\n(enter 'x' to exit)";
+        MenuHeader = "Your order : " + input + "\n(enter 'x' to exit)";
     }
-
-    private Order Order { get; set; }
-    private Bill Bill { get; set; }
-
-    private readonly DefaultSerializer _defaultSerializer = new DefaultSerializer();
-    private readonly JsonSerializer _jsonSerializer = new JsonSerializer();
-    private readonly XmlSerializer _xmlSerializer = new XmlSerializer();
 
     public void ReadOrder()
     {
-        string? input = "";
+        string? input;
 
         try
         {
+            new Menu().Print();
             Console.Write("Place your order ('exit' to cancel ordering) : ");
             input = Console.ReadLine()?.Trim();
 
-            if (!string.IsNullOrEmpty(input) && input != "exit")
-            {
-                this.SetMenuHeader(input);
-                this.Order = new Order(input);
-                this.Bill = new Bill(this.Order);
-                this.Main();
-            }
+            if (string.IsNullOrEmpty(input) || input == "exit") return;
+            SetMenuHeader(input);
+            Order = new Order(input);
+            Bill = new Bill(Order);
+            Main();
         }
         catch (Exception e)
         {
@@ -58,19 +56,22 @@ public class InteractiveOrderMenu : InteractiveNavigation
     {
         Console.Clear();
         Console.WriteLine("Bill preview");
-        string serialized = this.Bill.AcceptSerializer(serializer);
+        string serialized = Bill.AcceptSerializer(serializer);
         Console.WriteLine(serialized);
-        string? input = null;
-        while (input == null) input = Console.ReadLine();
-        this.Main();
+        ExitPrint();
     }
 
     private void PrintInstructions()
     {
         Console.Clear();
-        this.Order.PrintAllInstructions();
+        Order.PrintAllInstructions();
+        ExitPrint();
+    }
+
+    private void ExitPrint()
+    {
         string? input = null;
         while (input == null) input = Console.ReadLine();
-        this.Main();
+        Main();
     }
 }

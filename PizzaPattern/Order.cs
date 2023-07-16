@@ -2,7 +2,7 @@ namespace PizzaPattern;
 
 public class Order
 {
-    private readonly List<Pizza> _orderList = new List<Pizza>();
+    private readonly List<Pizza> _orderList = new ();
     public Order(string order)
     {
         string[] orderRows = order.Split(",");
@@ -24,14 +24,14 @@ public class Order
             string[] updateIngredients = Array.Empty<string>();
             if (rowElements.Length > 2) updateIngredients = rowElements.Skip(2).ToArray();
             pizza = new Pizza(basePizzaName, numberOfPizza, updateIngredients);
-            int index = this._orderList.IndexOf(pizza);
+            int index = _orderList.IndexOf(pizza);
             if (index != -1)
             {
-                this._orderList[index].Count += numberOfPizza;
+                _orderList[index].Count += numberOfPizza;
             }
             else
             {
-                this._orderList.Add(pizza);
+                _orderList.Add(pizza);
             }
             Console.WriteLine("Ok");
         }
@@ -39,7 +39,7 @@ public class Order
 
     public void PrintAllInstructions()
     {
-        foreach (var pizza in this._orderList)
+        foreach (var pizza in _orderList)
         {
             new Instructions(pizza).Print();
         }
@@ -47,6 +47,6 @@ public class Order
 
     public List<Pizza> GetOrderList()
     {
-        return this._orderList;
+        return _orderList;
     } 
 }

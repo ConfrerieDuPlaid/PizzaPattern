@@ -14,7 +14,7 @@ public class Ingredient: ISerializable
         Unit = unit;
     }
 
-    protected bool Equals(Ingredient other)
+    private bool Equals(Ingredient other)
     {
         return Name == other.Name;
     }

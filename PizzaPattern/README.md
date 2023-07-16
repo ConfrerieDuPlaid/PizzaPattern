@@ -14,10 +14,10 @@ On souhaite écrire un programme qui prend en entrée une commande de pizzas et 
 ## Modules additionnels implémentés
 - [x] Modification de pizzas
 - [x] Gestion des sorties
-- [ ] Menu de navigation
+- [x] Menu de navigation
 
 ## Patterns implémentés
-- [x] Pattern visiteur pour l'export des commandes
-- [ ] flyweight => ingrédients&pizza types => alléger la mémoire
-- [ ] memento => module historique de commandes ?
+- [x] Pattern **visiteur** pour l'export des commandes
+- [ ] **flyweight** => ingrédients&pizza types => alléger la mémoire
+- [ ] **memento** => module historique de commandes ?
 
