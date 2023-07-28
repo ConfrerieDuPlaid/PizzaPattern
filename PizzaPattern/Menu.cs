@@ -16,7 +16,7 @@ public class Menu
         Console.WriteLine("*** Menu ***");
         foreach (var pizza in StandardPizzas)
         {
-            Console.WriteLine("- " + pizza.Name);
+            Console.WriteLine("- " + pizza.Name + " : " + pizza.Price + " €");
         }
         Console.WriteLine("You can add 50 grams of an ingredient with +Ingredient or remove an with -Ingredient for 50 cents / ingredient");
     }
